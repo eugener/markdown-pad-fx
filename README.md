@@ -1,2 +1,6 @@
-markdown-pad-fx
-===============
+# Markdown-Pad-FX #
+----------
+
+JavaFX markdown WYSIWYG editor incarnation 
+
+
