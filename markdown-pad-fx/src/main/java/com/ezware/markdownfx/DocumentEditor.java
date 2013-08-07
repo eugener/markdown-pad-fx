@@ -2,11 +2,8 @@ package com.ezware.markdownfx;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 
@@ -17,11 +14,12 @@ public class DocumentEditor extends SplitPane {
     private WebView webView;
     private TextArea textArea;
     
-    public DocumentEditor() {
+    public DocumentEditor( String text ) {
+        
         webView = new WebView();
         webView.getStyleClass().add("browser");
 
-        textArea = new TextArea();
+        textArea = new TextArea(text);
         textArea.setWrapText(true);
         
         Font font = textArea.fontProperty().get();
@@ -33,13 +31,7 @@ public class DocumentEditor extends SplitPane {
             }
         });
         
-        BorderPane browser = new BorderPane();
-        ToolBar toolBar = new ToolBar();
-        toolBar.getItems().add( new ComboBox<String>());
-        browser.setTop( toolBar);
-        browser.setCenter( webView);
-        
-        getItems().addAll( textArea, browser);
+        getItems().addAll( textArea, webView);
 
     }
     

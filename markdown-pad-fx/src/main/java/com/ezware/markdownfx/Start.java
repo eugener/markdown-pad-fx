@@ -53,7 +53,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
     }
     
     private DocumentEditor createDocumentEditor() {
-        DocumentEditor editor = new DocumentEditor();
+        DocumentEditor editor = new DocumentEditor("");
         Tab tab = new Tab( "New Document" );
         tab.setContent(editor);
         tabs.getTabs().add(tab);
