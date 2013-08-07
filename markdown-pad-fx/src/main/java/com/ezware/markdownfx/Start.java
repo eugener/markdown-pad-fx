@@ -3,6 +3,8 @@ package com.ezware.markdownfx;
 import java.util.Arrays;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
@@ -17,6 +19,8 @@ import javafx.stage.Stage;
 import org.controlsfx.control.action.AbstractAction;
 import org.controlsfx.control.action.ActionGroup;
 import org.controlsfx.control.action.ActionUtils;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 
 public class Start extends javafx.application.Application implements DocumentEditorProvider {
 
@@ -53,9 +57,21 @@ public class Start extends javafx.application.Application implements DocumentEdi
     }
     
     private DocumentEditor createDocumentEditor() {
-        DocumentEditor editor = new DocumentEditor("");
+        final DocumentEditor editor = new DocumentEditor("");
         Tab tab = new Tab( "New Document" );
         tab.setContent(editor);
+        tab.setOnCloseRequest(new EventHandler<Event>() {
+            
+            public void handle(Event e) {
+                
+               Dialogs dlg = Dialogs.create().title("Confirmation").message("Close tab?");
+               if ( editor.isDirty() && dlg.showConfirm() != Dialog.Actions.YES ){
+                  e.consume();
+               }
+                
+            }
+        });
+        
         tabs.getTabs().add(tab);
         tabs.getSelectionModel().select(tab);
         return editor;
