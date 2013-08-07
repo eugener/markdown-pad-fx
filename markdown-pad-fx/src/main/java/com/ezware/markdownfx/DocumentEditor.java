@@ -23,8 +23,10 @@ public class DocumentEditor extends SplitPane {
 
         textArea = new TextArea();
         textArea.setWrapText(true);
+        
         Font font = textArea.fontProperty().get();
         textArea.setFont( Font.font(font.getName(), font.getSize() *1.1 ));
+        
         textArea.textProperty().addListener( new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> ob, String newText, String oldText) {
                 reparse(newText);

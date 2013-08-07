@@ -24,7 +24,9 @@ public class Start extends javafx.application.Application implements DocumentEdi
         
         MenuBar menuBar = ActionUtils.createMenuBar( Arrays.asList( 
           new ActionGroup("File",
-              new ActionNewEditor()),       
+              new ActionNewEditor(),
+              ActionUtils.ACTION_SEPARATOR,
+              new ActionExit(primaryStage)),       
           new ActionGroup("Edit")       
         ));
         
@@ -72,6 +74,22 @@ public class Start extends javafx.application.Application implements DocumentEdi
 
         @Override public void execute(ActionEvent e) {
             createDocumentEditor();
+        }
+        
+    }    
+    
+    class ActionExit extends AbstractAction {
+
+        private Stage stage;
+        
+        public ActionExit( Stage stage ) {
+            super("Exit");
+            assert stage != null;
+            this.stage = stage;
+        }
+
+        @Override public void execute(ActionEvent e) {
+            stage.close();
         }
         
     }    
