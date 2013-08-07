@@ -14,6 +14,8 @@ public class DocumentEditor extends SplitPane {
     private WebView webView;
     private TextArea textArea;
     
+    private boolean dirty = false;
+    
     public DocumentEditor( String text ) {
         
         webView = new WebView();
@@ -28,6 +30,7 @@ public class DocumentEditor extends SplitPane {
         textArea.textProperty().addListener( new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> ob, String newText, String oldText) {
                 reparse(newText);
+                dirty = true;
             }
         });
         
@@ -47,8 +50,12 @@ public class DocumentEditor extends SplitPane {
         String html = String.format( doc, css, textHtml);
 //        System.out.println(html);
         webView.getEngine().loadContent( html, "text/html");
-        webView.getEngine().executeScript("window.scrollTo(100,100);");
-    }    
+//        webView.getEngine().executeScript("window.scrollTo(100,100);");
+    }   
+    
+    public boolean isDirty() {
+        return dirty;
+    }
     
     
 }
