@@ -53,7 +53,7 @@ public class DocumentEditor extends SplitPane {
         String textHtml = Processor.process(text); 
         
         String html = String.format( doc, css, textHtml);
-        System.out.println(html);
+//        System.out.println(html);
         webView.getEngine().loadContent( html, "text/html");
         webView.getEngine().executeScript("window.scrollTo(100,100);");
     }    

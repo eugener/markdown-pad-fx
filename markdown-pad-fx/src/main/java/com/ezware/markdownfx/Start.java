@@ -7,7 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import org.controlsfx.control.action.AbstractAction;
@@ -22,17 +26,22 @@ public class Start extends javafx.application.Application implements DocumentEdi
         
         createDocumentEditor();
         
+        ActionNewEditor actionNewEditor = new ActionNewEditor();
+        
         MenuBar menuBar = ActionUtils.createMenuBar( Arrays.asList( 
           new ActionGroup("File",
-              new ActionNewEditor(),
+              actionNewEditor,
               ActionUtils.ACTION_SEPARATOR,
               new ActionExit(primaryStage)),       
           new ActionGroup("Edit")       
         ));
         
+        ToolBar toolBar = ActionUtils.createToolBar(Arrays.asList(
+           actionNewEditor
+        ));
         
         BorderPane content = new BorderPane();
-        content.setTop(menuBar);
+        content.setTop(new VBox(menuBar, toolBar));
         content.setCenter(tabs);
 //        Pane statusBar = new Pane( new Label("v 1.0.0"));
 //        statusBar.setPadding(new Insets(5,5,5,5));
@@ -70,6 +79,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
 
         public ActionNewEditor() {
             super("New");
+            setGraphic( new ImageView(new Image("/images/new_doc.png")));
         }
 
         @Override public void execute(ActionEvent e) {
