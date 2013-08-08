@@ -47,6 +47,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
         BorderPane content = new BorderPane();
         content.setTop(new VBox(menuBar, toolBar));
         content.setCenter(tabs);
+        content.setPrefSize(1000, 800);
 //        Pane statusBar = new Pane( new Label("v 1.0.0"));
 //        statusBar.setPadding(new Insets(5,5,5,5));
 //        content.setBottom(statusBar);
