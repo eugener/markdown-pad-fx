@@ -1,7 +1,7 @@
 package com.ezware.markdownfx;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
@@ -24,12 +24,13 @@ public class DocumentEditor extends SplitPane {
         textArea = new TextArea(text);
         textArea.setWrapText(true);
         
+        // TODO: Move to css
         Font font = textArea.fontProperty().get();
         textArea.setFont( Font.font(font.getName(), font.getSize() *1.1 ));
         
-        textArea.textProperty().addListener( new ChangeListener<String>() {
-            public void changed(ObservableValue<? extends String> ob, String newText, String oldText) {
-                reparse(newText);
+        textArea.textProperty().addListener( new InvalidationListener() {
+            public void invalidated(Observable o) {
+                reparse(textArea.getText());
                 dirty = true;
             }
         });
