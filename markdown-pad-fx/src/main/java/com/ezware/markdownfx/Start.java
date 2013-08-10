@@ -26,6 +26,11 @@ public class Start extends javafx.application.Application implements DocumentEdi
 
     private TabPane tabs = new TabPane();
     
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
     @Override public void start(Stage primaryStage) {
         
         createDocumentEditor();
@@ -36,9 +41,12 @@ public class Start extends javafx.application.Application implements DocumentEdi
           new ActionGroup("File",
               actionNewEditor,
               ActionUtils.ACTION_SEPARATOR,
-              new ActionExit(primaryStage)),       
+              new ActionAppExit(primaryStage)),       
           new ActionGroup("Edit")       
         ));
+        
+        menuBar.setUseSystemMenuBar(true); // Mac OSX support
+        
         
         ToolBar toolBar = ActionUtils.createToolBar(Arrays.asList(
            actionNewEditor
@@ -79,11 +87,6 @@ public class Start extends javafx.application.Application implements DocumentEdi
     }
 
 
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     public DocumentEditor getDocumentEditor() {
         Tab tab = tabs.getSelectionModel().getSelectedItem();
         return  tab == null? null: (DocumentEditor) tab.getContent();
@@ -105,11 +108,11 @@ public class Start extends javafx.application.Application implements DocumentEdi
         
     }    
     
-    class ActionExit extends AbstractAction {
+    class ActionAppExit extends AbstractAction {
 
         private Stage stage;
         
-        public ActionExit( Stage stage ) {
+        public ActionAppExit( Stage stage ) {
             super("Exit");
             assert stage != null;
             this.stage = stage;
