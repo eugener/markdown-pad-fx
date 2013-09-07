@@ -99,7 +99,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
 
         public ActionNewEditor() {
             super("New");
-            setGraphic( new Image("/images/new_doc.png"));
+            setGraphic( new Image("/images/add_file-26.png"));
         }
 
         @Override public void execute(ActionEvent e) {
