@@ -16,11 +16,19 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencies>
+	<repositories>
+	  <repository>
+	   <id>snapshotscentral</id>
+	   <name>Central Snapshots</name>
+	   <snapshots>true</snapshots>
+	   <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	  </repository>
+	</repositories>
+	<dependencies> 
 		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
-			<version>8.0.1</version>
+			<version>8.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.rjeschke</groupId>

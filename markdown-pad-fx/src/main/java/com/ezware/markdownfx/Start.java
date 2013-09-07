@@ -11,7 +11,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,7 +30,8 @@ public class Start extends javafx.application.Application implements DocumentEdi
         launch(args);
     }
     
-    @Override public void start(Stage primaryStage) {
+    @Override 
+    public void start(Stage primaryStage) {
         
         createDocumentEditor();
         
@@ -99,7 +99,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
 
         public ActionNewEditor() {
             super("New");
-            setGraphic( new ImageView(new Image("/images/new_doc.png")));
+            setGraphic( new Image("/images/new_doc.png"));
         }
 
         @Override public void execute(ActionEvent e) {
@@ -108,7 +108,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
         
     }    
     
-    class ActionAppExit extends AbstractAction {
+    static class ActionAppExit extends AbstractAction {
 
         private Stage stage;
         
