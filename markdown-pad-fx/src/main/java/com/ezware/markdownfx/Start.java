@@ -45,7 +45,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
         
         MenuBar menuBar = ActionUtils.createMenuBar( Arrays.asList( 
               new ActionGroup("File", actions("newdoc", "opendoc", "savedoc", "---", "appexit")),
-              new ActionGroup("Edit", actions("cut", "opendoc", "savedoc"))       
+              new ActionGroup("Edit", actions("cut", "copy", "paste"))       
         ));
         
         menuBar.setUseSystemMenuBar(true); // Mac OSX support
