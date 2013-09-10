@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import org.controlsfx.control.action.ActionGroup;
 import org.controlsfx.control.action.ActionMap;
-import static org.controlsfx.control.action.ActionMap.action;
 import static org.controlsfx.control.action.ActionMap.actions;
 import org.controlsfx.control.action.ActionProxy;
 import org.controlsfx.control.action.ActionUtils;
@@ -53,9 +52,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
         
         
         ToolBar toolBar = ActionUtils.createToolBar( 
-        	actions("newdoc", "opendoc", "savedoc", 
-        			"---",
-        			"cut", "copy", "paste"),
+        	actions("newdoc", "opendoc", "savedoc",	"---", "cut", "copy", "paste"),
             ActionTextBehavior.HIDE
         );
         
@@ -124,7 +121,6 @@ public class Start extends javafx.application.Application implements DocumentEdi
     private void paste(ActionEvent e) {
     	System.out.println("Start.paste()");
     }
-
 
     public DocumentEditor getDocumentEditor() {
         Tab tab = tabs.getSelectionModel().getSelectedItem();
