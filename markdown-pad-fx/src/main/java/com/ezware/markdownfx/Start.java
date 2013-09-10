@@ -10,13 +10,15 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToolBar;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import org.controlsfx.control.action.AbstractAction;
 import org.controlsfx.control.action.ActionGroup;
+import org.controlsfx.control.action.ActionMap;
+import static org.controlsfx.control.action.ActionMap.action;
+import static org.controlsfx.control.action.ActionMap.actions;
+import org.controlsfx.control.action.ActionProxy;
 import org.controlsfx.control.action.ActionUtils;
 import org.controlsfx.control.action.ActionUtils.ActionTextBehavior;
 import org.controlsfx.dialog.Dialog;
@@ -25,7 +27,12 @@ import org.controlsfx.dialog.Dialogs;
 public class Start extends javafx.application.Application implements DocumentEditorProvider {
 
     private TabPane tabs = new TabPane();
+    private Stage stage;
 
+    public Start() {
+    	ActionMap.register(this);
+	}
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -33,30 +40,22 @@ public class Start extends javafx.application.Application implements DocumentEdi
     @Override 
     public void start(Stage primaryStage) {
         
+    	stage = primaryStage;
+    	
         createDocumentEditor();
         
-        ActionNewEditor  actionNewEditor  = new ActionNewEditor();
-        ActionOpenEditor actionOpenEditor = new ActionOpenEditor();
-        ActionSaveEditor actionSaveEditor = new ActionSaveEditor();
-        
-        ActionCutText actionCutText  = new ActionCutText();
-        ActionCopyText actionCopyText = new ActionCopyText();
-        ActionPasteText actionPasteText = new ActionPasteText();
-        
         MenuBar menuBar = ActionUtils.createMenuBar( Arrays.asList( 
-          new ActionGroup("File", actionNewEditor, actionOpenEditor, actionSaveEditor,
-              ActionUtils.ACTION_SEPARATOR,
-              new ActionAppExit(primaryStage)),       
-          new ActionGroup("Edit", actionCutText, actionCopyText, actionPasteText)       
+              new ActionGroup("File", actions("newdoc", "opendoc", "savedoc", "---", "appexit")),
+              new ActionGroup("Edit", actions("cut", "opendoc", "savedoc"))       
         ));
         
         menuBar.setUseSystemMenuBar(true); // Mac OSX support
         
         
         ToolBar toolBar = ActionUtils.createToolBar( Arrays.asList(
-            actionNewEditor, actionOpenEditor, actionSaveEditor,
+        	action("newdoc"), action("opendoc"), action("savedoc"),
             ActionUtils.ACTION_SEPARATOR,
-            actionCutText, actionCopyText, actionPasteText
+            action("cut"), action("copy"), action("paste")
         ), ActionTextBehavior.HIDE);
         
         BorderPane content = new BorderPane();
@@ -72,6 +71,11 @@ public class Start extends javafx.application.Application implements DocumentEdi
         primaryStage.show();
     }
     
+//    private Action action(String id) {
+//    	return ActionMap.get(id);
+//    }
+    
+    @ActionProxy(id="newdoc", text="New", image="/images/file2.png", longText = "Create New Document")
     private DocumentEditor createDocumentEditor() {
         final DocumentEditor editor = new DocumentEditor("");
         Tab tab = new Tab( "New Document" );
@@ -92,110 +96,44 @@ public class Start extends javafx.application.Application implements DocumentEdi
         tabs.getSelectionModel().select(tab);
         return editor;
     }
+    
+    @ActionProxy( id ="appexit", text="Exit")
+    private void appExit(ActionEvent e) {
+    	if ( stage != null ) stage.close();
+    } 
+    
+    
+    @ActionProxy( id ="opendoc", text="Open", image="/images/folder-open.png")
+    private void openDocument(ActionEvent e) {
+    	System.out.println("Start.openDocument()");
+    } 
+    
+    @ActionProxy( id ="savedoc", text="Save", image="/images/disk.png")
+    private void saveDocument(ActionEvent e) {
+    	System.out.println("Start.saveDocument()");
+    } 
+    
+    @ActionProxy( id ="cut", text="Cut", image="/images/scissors.png")
+    private void cut(ActionEvent e) {
+    	System.out.println("Start.cut()");
+    }
+    
+    @ActionProxy( id ="copy", text="Cut", image="/images/copy.png")
+    private void copy(ActionEvent e) {
+    	System.out.println("Start.copy()");
+    }
+    
+    @ActionProxy( id ="paste", text="Paste", image="/images/paste2.png")
+    private void paste(ActionEvent e) {
+    	System.out.println("Start.paste()");
+    }
 
 
     public DocumentEditor getDocumentEditor() {
         Tab tab = tabs.getSelectionModel().getSelectedItem();
         return  tab == null? null: (DocumentEditor) tab.getContent();
     }
-    
-    
-/////// Actions //////////////////////////////////////////////////////////////////////////////    
 
-    class ActionNewEditor extends AbstractAction {
-
-        public ActionNewEditor() {
-            super("New");
-            setGraphic(  new Image("/images/file2.png") );
-            setLongText("Create New Document");
-        }
-
-        @Override public void execute(ActionEvent e) {
-            createDocumentEditor();
-        }
-        
-    }   
-    
-    class ActionOpenEditor extends AbstractAction {
-
-        public ActionOpenEditor() {
-            super("Open");
-            setGraphic(  new Image("/images/folder-open.png") );
-            setLongText("Open Existing Document");
-        }
-
-        @Override public void execute(ActionEvent e) {
-        }
-        
-    }    
-    
-    class ActionSaveEditor extends AbstractAction {
-
-        public ActionSaveEditor() {
-            super("Save");
-            setGraphic(  new Image("/images/disk.png") );
-            setLongText("Save Document");
-        }
-
-        @Override public void execute(ActionEvent e) {
-        }
-        
-    }   
-    
-    class ActionCutText extends AbstractAction {
-
-        public ActionCutText() {
-            super("Cut");
-            setGraphic(  new Image("/images/scissors.png") );
-            setLongText("Cut");
-        }
-
-        @Override public void execute(ActionEvent e) {
-        }
-        
-    }   
-    
-    class ActionCopyText extends AbstractAction {
-
-        public ActionCopyText() {
-            super("Copy");
-            setGraphic(  new Image("/images/copy.png") );
-            setLongText("Copy");
-        }
-
-        @Override public void execute(ActionEvent e) {
-        }
-        
-    }   
-    
-    class ActionPasteText extends AbstractAction {
-
-        public ActionPasteText() {
-            super("Paste");
-            setGraphic(  new Image("/images/paste2.png") );
-            setLongText("Paste");
-        }
-
-        @Override public void execute(ActionEvent e) {
-        }
-        
-    }       
-    static class ActionAppExit extends AbstractAction {
-
-        private Stage stage;
-        
-        public ActionAppExit( Stage stage ) {
-            super("Exit");
-            assert stage != null;
-            this.stage = stage;
-        }
-
-        @Override public void execute(ActionEvent e) {
-            stage.close();
-        }
-        
-    }    
-    
 }
 
 
