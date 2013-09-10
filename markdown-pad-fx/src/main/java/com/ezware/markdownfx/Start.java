@@ -52,11 +52,12 @@ public class Start extends javafx.application.Application implements DocumentEdi
         menuBar.setUseSystemMenuBar(true); // Mac OSX support
         
         
-        ToolBar toolBar = ActionUtils.createToolBar( Arrays.asList(
-        	action("newdoc"), action("opendoc"), action("savedoc"),
-            ActionUtils.ACTION_SEPARATOR,
-            action("cut"), action("copy"), action("paste")
-        ), ActionTextBehavior.HIDE);
+        ToolBar toolBar = ActionUtils.createToolBar( 
+        	actions("newdoc", "opendoc", "savedoc", 
+        			"---",
+        			"cut", "copy", "paste"),
+            ActionTextBehavior.HIDE
+        );
         
         BorderPane content = new BorderPane();
         content.setTop(new VBox(menuBar, toolBar));
@@ -70,10 +71,6 @@ public class Start extends javafx.application.Application implements DocumentEdi
         primaryStage.setScene(new Scene(content));
         primaryStage.show();
     }
-    
-//    private Action action(String id) {
-//    	return ActionMap.get(id);
-//    }
     
     @ActionProxy(id="newdoc", text="New", image="/images/file2.png", longText = "Create New Document")
     private DocumentEditor createDocumentEditor() {
