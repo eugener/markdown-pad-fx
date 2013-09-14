@@ -30,12 +30,6 @@ public class Start extends javafx.application.Application implements DocumentEdi
 
     public Start() {
     	ActionMap.register(this);
-    	try {
-			Class.forName("org.controlsfx.iconfont.IconFontRegistry");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
     
     public static void main(String[] args) {
@@ -78,7 +72,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
     @ActionProxy(
     	id="newdoc", 
     	text="New", 
-    	graphic="font>icomoon|NEW_DOC", 
+    	graphic="font>icomoon|FILE2", 
     	longText = "Create New Document")
     private DocumentEditor createDocumentEditor() {
         final DocumentEditor editor = new DocumentEditor("");
@@ -117,7 +111,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
     	System.out.println("Start.saveDocument()");
     } 
     
-    @ActionProxy( id ="cut", text="Cut", graphic="font>icomoon|CUT")
+    @ActionProxy( id ="cut", text="Cut", graphic="font>icomoon|SCISSORS")
     private void cut(ActionEvent e) {
     	System.out.println("Start.cut()");
     }
@@ -127,7 +121,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
     	System.out.println("Start.copy()");
     }
     
-    @ActionProxy( id ="paste", text="Paste", graphic="font>icomoon|PASTE")
+    @ActionProxy( id ="paste", text="Paste", graphic="font>icomoon|PASTE2")
     private void paste(ActionEvent e) {
     	System.out.println("Start.paste()");
     }
