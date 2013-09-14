@@ -69,7 +69,7 @@ public class Start extends javafx.application.Application implements DocumentEdi
         primaryStage.show();
     }
     
-    @ActionProxy(id="newdoc", text="New", image="/images/file2.png", longText = "Create New Document")
+    @ActionProxy(id="newdoc", text="New", graphic="/images/file2.png", longText = "Create New Document")
     private DocumentEditor createDocumentEditor() {
         final DocumentEditor editor = new DocumentEditor("");
         Tab tab = new Tab( "New Document" );
@@ -97,27 +97,27 @@ public class Start extends javafx.application.Application implements DocumentEdi
     } 
     
     
-    @ActionProxy( id ="opendoc", text="Open", image="/images/folder-open.png")
+    @ActionProxy( id ="opendoc", text="Open", graphic="/images/folder-open.png")
     private void openDocument(ActionEvent e) {
     	System.out.println("Start.openDocument()");
     } 
     
-    @ActionProxy( id ="savedoc", text="Save", image="/images/disk.png")
+    @ActionProxy( id ="savedoc", text="Save", graphic="/images/disk.png")
     private void saveDocument(ActionEvent e) {
     	System.out.println("Start.saveDocument()");
     } 
     
-    @ActionProxy( id ="cut", text="Cut", image="/images/scissors.png")
+    @ActionProxy( id ="cut", text="Cut", graphic="/images/scissors.png")
     private void cut(ActionEvent e) {
     	System.out.println("Start.cut()");
     }
     
-    @ActionProxy( id ="copy", text="Cut", image="/images/copy.png")
+    @ActionProxy( id ="copy", text="Cut", graphic="/images/copy.png")
     private void copy(ActionEvent e) {
     	System.out.println("Start.copy()");
     }
     
-    @ActionProxy( id ="paste", text="Paste", image="/images/paste2.png")
+    @ActionProxy( id ="paste", text="Paste", graphic="/images/paste2.png")
     private void paste(ActionEvent e) {
     	System.out.println("Start.paste()");
     }
