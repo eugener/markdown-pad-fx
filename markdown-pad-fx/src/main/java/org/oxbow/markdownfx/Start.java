@@ -30,6 +30,12 @@ public class Start extends javafx.application.Application implements DocumentEdi
 
     public Start() {
     	ActionMap.register(this);
+    	try {
+			Class.forName("org.controlsfx.iconfont.IconFontRegistry");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
     
     public static void main(String[] args) {
@@ -69,7 +75,11 @@ public class Start extends javafx.application.Application implements DocumentEdi
         primaryStage.show();
     }
     
-    @ActionProxy(id="newdoc", text="New", graphic="/images/file2.png", longText = "Create New Document")
+    @ActionProxy(
+    	id="newdoc", 
+    	text="New", 
+    	graphic="font>icomoon|NEW_DOC", 
+    	longText = "Create New Document")
     private DocumentEditor createDocumentEditor() {
         final DocumentEditor editor = new DocumentEditor("");
         Tab tab = new Tab( "New Document" );
@@ -97,27 +107,27 @@ public class Start extends javafx.application.Application implements DocumentEdi
     } 
     
     
-    @ActionProxy( id ="opendoc", text="Open", graphic="/images/folder-open.png")
+    @ActionProxy( id ="opendoc", text="Open", graphic="font>icomoon|FOLDER_OPEN")
     private void openDocument(ActionEvent e) {
     	System.out.println("Start.openDocument()");
     } 
     
-    @ActionProxy( id ="savedoc", text="Save", graphic="/images/disk.png")
+    @ActionProxy( id ="savedoc", text="Save", graphic="font>icomoon|DISK")
     private void saveDocument(ActionEvent e) {
     	System.out.println("Start.saveDocument()");
     } 
     
-    @ActionProxy( id ="cut", text="Cut", graphic="/images/scissors.png")
+    @ActionProxy( id ="cut", text="Cut", graphic="font>icomoon|CUT")
     private void cut(ActionEvent e) {
     	System.out.println("Start.cut()");
     }
     
-    @ActionProxy( id ="copy", text="Cut", graphic="/images/copy.png")
+    @ActionProxy( id ="copy", text="Copy", graphic="font>icomoon|COPY")
     private void copy(ActionEvent e) {
     	System.out.println("Start.copy()");
     }
     
-    @ActionProxy( id ="paste", text="Paste", graphic="/images/paste2.png")
+    @ActionProxy( id ="paste", text="Paste", graphic="font>icomoon|PASTE")
     private void paste(ActionEvent e) {
     	System.out.println("Start.paste()");
     }
