@@ -1,4 +1,4 @@
-package com.ezware.markdownfx;
+package org.oxbow.markdownfx;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;

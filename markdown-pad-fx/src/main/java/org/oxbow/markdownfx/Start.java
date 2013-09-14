@@ -1,4 +1,4 @@
-package com.ezware.markdownfx;
+package org.oxbow.markdownfx;
 
 import java.util.Arrays;
 
