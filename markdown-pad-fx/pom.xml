@@ -29,7 +29,9 @@
 		<repository>
 			<id>snapshotscentral</id>
 			<name>Central Snapshots</name>
-			<snapshots>true</snapshots>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 	</repositories>
