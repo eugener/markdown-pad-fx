@@ -1,0 +1,5 @@
+language: java
+before_script: cd markdown-pad-fx
+
+jdk:
+  - oraclejdk8
